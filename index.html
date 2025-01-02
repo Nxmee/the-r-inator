@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The R-inator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input, button {
+            margin-bottom: 10px;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>The R-inator</h1>
+
+    <!-- Input field and button -->
+    <input type="text" id="textInput" placeholder="Enter some text" />
+    <button onclick="manipulateText()">Make it R</button>
+
+    <!-- Result display -->
+    <div id="result"></div>
+
+    <script>
+        // JavaScript function that manipulates the text
+        function manipulateText() {
+
+            // Define vowels to check against
+            var vowels = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'];
+            // Get the value from the input field
+            var inputText = document.getElementById("textInput").value;
+            
+            // Example manipulation: Convert text to lower case
+            var lowerCaseText = inputText.toLowerCase();
+
+            // Split the input string into words using space as a separator
+            var words = lowerCaseText.split(" ");
+
+            // Add 'r' to the start of each word
+            // Modify each word based on the conditions
+            var modifiedWords = words.map(function(word) {
+                // Check if the second letter is 'r'
+                if (word.charAt(1).toLowerCase() === 'r') {
+                    return word.slice(1); // Remove the first letter
+                }
+
+                // Check if the first letter is a consonant (and not 'r')
+                var firstLetter = word.charAt(0);
+                if (vowels.includes(firstLetter)) {
+                    return "r" + word
+                }
+                if (firstLetter.toLowerCase() !== 'r') {
+                    return "r" + word.slice(1); // Replace first letter with 'r'
+                }
+
+                return word; // Leave the word unchanged if it starts with a vowel or 'r'
+            });
+            var resultString = modifiedWords.join(" ");
+
+            // Display the manipulated text under the input box
+            document.getElementById("result").innerText = resultString;
+        }
+    </script>
+
+</body>
+</html>
